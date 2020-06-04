@@ -1,5 +1,5 @@
 # SURVEY_WEB
-성결대 설문조사 
+설문조사 
 
 ## 자주 쓰는 명령어    
  * npm install : package.json에 명시된 모듈 설치
