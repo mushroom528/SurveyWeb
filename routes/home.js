@@ -12,12 +12,17 @@ router.get('/login', (req, res) => {
       errors:errors
     });
 });
+router.get('/success', (req, res) => {
+    var succId = req.flash('succId')[0] || {};
+    res.render('users/success', { succId : succId.stdid })
+})
 router.get('/', (req, res) => res.redirect('/home'));
 router.get('/home', (req, res) => res.render('home/welcome'));
 router.get('/about', (req, res) => res.render('home/about'));
 router.post('/login',(req,res,next) => {
     var errors = {};
     var isValid = true;
+    console.log(req.body,"로그인");
     if(!req.body.stdid){
         //console.log("아디안씀");
         isValid = false;
@@ -29,6 +34,8 @@ router.post('/login',(req,res,next) => {
     }
 
     if(isValid){
+      console.log("로그인성공")
+      req.flash('succId',req.body);
       next();
     }
     else {
@@ -37,7 +44,7 @@ router.post('/login',(req,res,next) => {
     }
   },
   passport.authenticate('local-login', {    // 로그인 성공, 실패시 해당 경로로 redirect
-    successRedirect : '/',
+    successRedirect : '/success',
     failureRedirect : '/login'
   }
 ));
@@ -46,4 +53,5 @@ router.get('/logout', (req, res) => {
   req.logout(); // passport에서 제공되는 로그아웃 함수 사용
   res.redirect('/');
 });
+
 module.exports = router;

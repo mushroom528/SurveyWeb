@@ -40,3 +40,11 @@ passport.use('local-login',
 );
 
 module.exports = passport;
+
+/*
+로그인 버튼이 클릭되면 routes/home.js의 [post] /login route의 코드가 실행됩니다.
+다음으로 config/passport.js의 local-strategy의 코드가 실행됩니다.
+로그인이 성공하면 config/passport.js의 serialize코드가 실행됩니다.
+마지막으로 routes/home.js의 [post] /login route의 successRedirect의 route으로 redirect가 됩니다.
+로그인이 된 이후에는 모든 request가 config/passport.js의 deserialize코드를 거치게 됩니다.
+*/
