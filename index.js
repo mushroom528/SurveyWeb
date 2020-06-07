@@ -4,7 +4,7 @@ var bodyParser = require('body-parser');
 var flash = require('connect-flash'); 
 var session = require('express-session'); 
 var methodOverride = require('method-override');
-
+var passport = require('./config/passport'); 
 var app = express();
 
 // mongoDB 기본 설정 4개 꼭 해야함
@@ -23,6 +23,13 @@ app.use(bodyParser.urlencoded({extended:true})); // form으로 받은 데이터�
 app.use(methodOverride('_method'));
 app.use(flash()); // flash 초기화 flash() 사용가능
 app.use(session({secret:'MySecret', resave:true, saveUninitialized:true})); // 사용자를 구분하기 위한 세션 관리
+app.use(passport.initialize()); // passport 초가화
+app.use(passport.session());  // passport와 session을 연결
+app.use((req, res, next) => {
+  res.locals.isAuthenticated = req.isAuthenticated(); // isAuthenticated() 현재 로그인인지 아닌지를 false, true로 반환
+  res.locals.currentUser = req.user;  // 로그인된 유저 정보를 담음
+  next();
+})
 
 db.once('open', function(){
   console.log('DB connected');
