@@ -19,4 +19,20 @@ util.parseError = function(errors){
   return parsed;
 }
 
+util.isLoggedin = function(req, res, next){   // route에서 콜백될 함수, login인지 아닌지 판단
+  if(req.isAuthenticated()){
+    next();
+  } 
+  else {
+    req.flash('errors', {login:'로그인 해주세요.'});
+    res.redirect('/login');
+  }
+}
+
+util.noPermission = function(req, res){   // 콜백함수 아님, 권한을 확인하는 함수
+  req.flash('errors', {login:"권한이 없습니다."});
+  req.logout();
+  res.redirect('/login');
+}
+
 module.exports = util;

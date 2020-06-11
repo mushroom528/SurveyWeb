@@ -5,7 +5,7 @@ var passport = require('../config/passport');
 
 // Home
 router.get('/login', (req, res) => {
-    var username = req.flash('stdid')[0];
+    var username = req.flash('stdid')[0];   // passport.js 에서 온 데이터들
     var errors = req.flash('errors')[0] || {};
     res.render('home/login', {
       username:username,
@@ -14,7 +14,7 @@ router.get('/login', (req, res) => {
 });
 router.get('/success', (req, res) => {
     var succId = req.flash('succId')[0] || {};
-    res.render('users/success', { succId : succId.stdid })
+    res.render('users/success', { succId : succId })
 })
 router.get('/', (req, res) => res.redirect('/home'));
 router.get('/home', (req, res) => res.render('home/welcome'));
@@ -22,7 +22,7 @@ router.get('/about', (req, res) => res.render('home/about'));
 router.post('/login',(req,res,next) => {
     var errors = {};
     var isValid = true;
-    console.log(req.body,"로그인");
+    console.log(req.body,"로그인시도");
     if(!req.body.stdid){
         //console.log("아디안씀");
         isValid = false;
@@ -34,14 +34,13 @@ router.post('/login',(req,res,next) => {
     }
 
     if(isValid){
-      console.log("로그인성공")
-      req.flash('succId',req.body);
       next();
     }
     else {
       req.flash('errors',errors);
       res.redirect('/login');
     }
+    //req.flash('succId',req.body);
   },
   passport.authenticate('local-login', {    // 로그인 성공, 실패시 해당 경로로 redirect
     successRedirect : '/success',

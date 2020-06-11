@@ -7,6 +7,7 @@ var util = require('../util');
 // Index 
 router.get('/', function(req, res){
   Post.find({})                  // DB에서 데이터 찾기
+  .populate('author')            // relation 된 항목의 값 생성 (user의 값을 author에 생성함)
   .sort('-createdAt')            // 정렬방법 -붙으면 내림차순 createdAt 수정될 경우 날짜 저장
   .exec(function(err, posts){    // 데이터를 받아서 할일 쓰기
     if(err) return res.json(err);
@@ -16,14 +17,17 @@ router.get('/', function(req, res){
 });
 
 // New
-router.get('/new', function(req, res){
+router.get('/new', util.isLoggedin, function(req, res){
   var post = req.flash('post')[0] || {};
   var errors = req.flash('errors')[0] || {};
   res.render('posts/new', { post:post, errors:errors });
 });
 
 // create
-router.post('/', function(req, res){
+router.post('/', util.isLoggedin, function(req, res){
+  console.log("req.user:", req.user);
+  req.body.author = req.user._id; // req.user는 passport에 의해 로그인하면 자동 생성
+  console.log("작성자:",req.body);
   Post.create(req.body, function(err, post){
     if(err){
         req.flash('post', req.body);
@@ -36,14 +40,18 @@ router.post('/', function(req, res){
 
 // show
 router.get('/:id', function(req, res){
-  Post.findOne({_id:req.params.id}, function(err, post){
+  Post.findOne({_id:req.params.id})   // 하나만 검색 (findOne()) _id가 클릭한 게시물의 id인 데이터 출력
+  .populate('author')             
+  .exec(function(err, post){          
     if(err) return res.json(err);
+    console.log('찾은데이터: ',post)
     res.render('posts/show', {post:post});
   });
 });
-
+// isLoggedin 함수를 사용하여 로그인 할 경우에만 해당 기능 사용 가능
+// checkPermission 함수를 사용하여 본인이 작성한 글만 edit, update, delete가능
 // edit
-router.get('/:id/edit', function(req, res){
+router.get('/:id/edit', util.isLoggedin, checkPermission, function(req, res){
     var post = req.flash('post')[0];
     var errors = req.flash('errors')[0] || {};
     if(!post){
@@ -59,7 +67,7 @@ router.get('/:id/edit', function(req, res){
 });
 
 // update
-router.put('/:id', function(req, res){
+router.put('/:id', util.isLoggedin, checkPermission, function(req, res){
     req.body.updatedAt = Date.now();
     Post.findOneAndUpdate({_id:req.params.id}, req.body, {runValidators:true}, function(err, post){
       if(err){
@@ -72,7 +80,7 @@ router.put('/:id', function(req, res){
 });
 
 // destroy
-router.delete('/:id', function(req, res){
+router.delete('/:id', util.isLoggedin, checkPermission, function(req, res){
   Post.deleteOne({_id:req.params.id}, function(err){
     if(err) return res.json(err);
     res.redirect('/posts');
@@ -80,3 +88,12 @@ router.delete('/:id', function(req, res){
 });
 
 module.exports = router;
+
+function checkPermission(req, res, next){   // 해당 게시물에 기록된 작성자와 로그인된 id를 비교하는 함수
+  Post.findOne({_id:req.params.id}, function(err, post){
+    if(err) return res.json(err);
+    if(post.author != req.user.id) return util.noPermission(req, res);
+
+    next();   // 계속 진행
+  });
+}

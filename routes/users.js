@@ -25,3 +25,12 @@ router.post('/', (req, res) => {
 });
 
 module.exports = router;
+// 권한 확인 함수
+function checkPermission(req, res, next){
+  User.findOne({username:req.params.username}, function(err, user){
+   if(err) return res.json(err);
+   if(user.id != req.user.id) return util.noPermission(req, res);
+ 
+   next();
+  });
+ }

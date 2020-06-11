@@ -28,6 +28,9 @@
 
           <div class="col-md-5 col-lg-4 col-xl-3 order-sm-1 order-md-2"> 
             <div class="post-info card m-2 p-2"> 
+              <div class="border-bottom pb-1 mb-1"> 
+                <span>작성자</span> : <%= post.author ? post.author.stdid : "" %>
+              </div>
               <div><span>날짜</span> : <span data-date-time="<%= post.createdAt %>"></span></div> 
               <% if(post.updatedAt) { %>
                 <div><span>수정날짜</span> : <span data-date-time="<%= post.updatedAt %>"></span></div> 
@@ -40,10 +43,12 @@
 
       <div class="mt-3">
         <a class="btn btn-primary" href="/posts">뒤로가기</a>
-        <a class="btn btn-primary" href="/posts/<%= post._id %>/edit">수정</a>
-        <form action="/posts/<%= post._id %>?_method=delete" method="post" class="d-inline">
-          <a class="btn btn-primary" href="javascript:void(0)" onclick="confirm('정말로 삭제하시겠습니까?')?this.parentElement.submit():null;">삭제</a>
-        </form>
+        <% if(isAuthenticated && post.author && currentUser.id == post.author.id){ %> <!-- 로그인된 아이디랑 작성자가 같을경우만 보임 -->
+          <a class="btn btn-primary" href="/posts/<%= post._id %>/edit">수정</a>
+          <form action="/posts/<%= post._id %>?_method=delete" method="post" class="d-inline">
+            <a class="btn btn-primary" href="#" onclick="confirm('정말로 삭제하시겠습니까?')?this.parentElement.submit():null;">삭제</a>
+          </form>
+        <% } %>
       </div>
 
     </div>

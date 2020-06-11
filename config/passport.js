@@ -4,7 +4,6 @@ var LocalStrategy = require('passport-local').Strategy;
 var User = require('../models/User');
 
 passport.serializeUser(function(user, done) {   // 로그인시 DB에서 발견한 user를 세션에 저장하는 법 설정
-    console.log(user);
   done(null, user.id);  // id만 저장 첫번째 파라미터는 err를 나타냄 없을땐 null
 });
 passport.deserializeUser(function(id, done) {   // request 시 세션에서 어떻게 user 객체를 만들지 정함
@@ -27,6 +26,8 @@ passport.use('local-login',
           if (err) return done(err);
 
           if (user && user.authenticate(password)){ // 해쉬 비번 비교
+            console.log("로그인 성공:", username);
+            req.flash('succId',username);
             return done(null, user);
           }
           else {
