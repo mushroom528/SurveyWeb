@@ -13,7 +13,7 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb p-1 pl-2 pr-2">
           <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="/posts">Board</a></li>
+          <li class="breadcrumb-item"><a href="/posts/<%= boardNum %>">Board<%= boardNum %></a></li>
           <li class="breadcrumb-item active" aria-current="page"><%= post.title %></li>
         </ol>
       </nav>
@@ -44,8 +44,8 @@
       <div class="mt-3">
         <a class="btn btn-primary" href="/posts">뒤로가기</a>
         <% if(isAuthenticated && post.author && currentUser.id == post.author.id){ %> <!-- 로그인된 아이디랑 작성자가 같을경우만 보임 -->
-          <a class="btn btn-primary" href="/posts/<%= post._id %>/edit">수정</a>
-          <form action="/posts/<%= post._id %>?_method=delete" method="post" class="d-inline">
+          <a class="btn btn-primary" href="/posts/<%= boardNum %>/<%= post._id %>/edit">수정</a>
+          <form action="/posts/<%= boardNum %>/<%= post._id %>?_method=delete" method="post" class="d-inline">
             <a class="btn btn-primary" href="#" onclick="confirm('정말로 삭제하시겠습니까?')?this.parentElement.submit():null;">삭제</a>
           </form>
         <% } %>

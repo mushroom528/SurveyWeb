@@ -31,7 +31,7 @@
           <% posts.forEach(function(post) { %>
             <tr>
               <td>
-                <a href="/posts/<%= post._id %>"><div class="ellipsis"><%= post.title %></div></a>
+                <a href="/posts/<%= boardNum %>/<%= post._id %>"><div class="ellipsis"><%= post.title %></div></a>
               </td>
               <td class="author"> 
                 <div class="ellipsis"><%= post.author ? post.author.stdid : "" %></div>
@@ -47,7 +47,7 @@
 
       <div>
         <% if(isAuthenticated){ %> <!-- 로그인 상태일 경우 글쓰기 보임 -->
-          <a class="btn btn-primary" href="/posts/new">글쓰기</a>
+          <a class="btn btn-primary" href="/posts/<%= boardNum %>/new">글쓰기</a>
         <% } %>
       </div>
 

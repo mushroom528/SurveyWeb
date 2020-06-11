@@ -13,13 +13,13 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb p-1 pl-2 pr-2">
           <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="/posts">Board</a></li>
-          <li class="breadcrumb-item"><a href="/posts/<%= post._id %>"><%= post.title %></a></li>
+          <li class="breadcrumb-item"><a href="/posts/<%= boardNum %>">Board<%= boardNum %></a></li>
+          <li class="breadcrumb-item"><a href="/posts/<%= boardNum %>/<%= post._id %>"><%= post.title %></a></li>
           <li class="breadcrumb-item active" aria-current="page">Edit Post</li>
         </ol>
       </nav>
 
-      <form action="/posts/<%= post._id %>?_method=put" method="post">
+      <form action="/posts/<%= boardNum %>/<%= post._id %>?_method=put" method="post">
 
         <div class="form-group">
           <label for="title">제목</label>

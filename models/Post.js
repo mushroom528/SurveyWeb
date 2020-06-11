@@ -12,8 +12,10 @@ var postSchema = mongoose.Schema({
   numId:{type:Number}, // 글번호
   createdAt:{type:Date, default:Date.now}, // Date.now는 현재 시간 리턴하는 함수
   updatedAt:{type:Date},
+  boardNum:{type:Number}  // 게시판 유형
 });
 
+// 글 번호 할당
 postSchema.pre('save', async function (next){ //
   var post = this;  // 글이 생성되면서 postSchema에 값 저장
   console.log("글: ",post)

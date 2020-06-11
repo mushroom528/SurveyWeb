@@ -13,12 +13,12 @@
       <nav aria-label="breadcrumb"> <!-- 부트스트랩꺼 가져옴 -->
         <ol class="breadcrumb p-1 pl-2 pr-2">
           <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="/posts">Board</a></li>
+          <li class="breadcrumb-item"><a href="/posts/<%= boardNum %>">Board<%= boardNum %></a></li>
           <li class="breadcrumb-item active" aria-current="page">New Post</li>
         </ol>
       </nav>
 
-      <form action="/posts" method="post">
+      <form action="/posts/<%= boardNum %>" method="post">
 
         <div class="form-group">
           <label for="title">제목</label>
