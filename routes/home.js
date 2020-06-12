@@ -15,8 +15,10 @@ router.get('/login', (req, res) => {
 router.get('/home', (req, res) => {
     var succId = req.flash('succId')[0] || {};
     var admin = req.flash('admin')[0] || {};
+    
     res.render('home/welcome', { succId : succId, admin : admin })
-})
+    
+  })
 router.get('/', (req, res) => res.redirect('/home'));
 //router.get('/home', (req, res) => res.render('home/welcome'));
 router.get('/about', (req, res) => res.render('home/about'));
@@ -33,7 +35,6 @@ router.post('/login',(req,res,next) => {
       isValid = false;
       errors.password = '비밀번호를 입력해주세요.';
     }
-
     if(isValid){
       next();
     }

@@ -37,7 +37,9 @@
         <% if(errors.login){ %>
           <div class="invalid-feedback d-block"><%= errors.login %></div>
         <% } %>
-
+        <% if(errors.state){ %>
+          <div class="invalid-feedback d-block"><%= errors.state %></div>
+        <% } %>
         <div class="mt-3">
           <input class="btn btn-primary" type="submit" value="로그인">
         </div>

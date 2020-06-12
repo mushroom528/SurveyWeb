@@ -23,14 +23,22 @@ passport.use('local-login',
       User.findOne({stdid:username})    // DB에서 아이디랑 비번찾기
         .select({password:1})
         .select({admin:1})
+        .select({state:1})
         .exec(function(err, user) {
           if (err) return done(err);
-          if (user && user.authenticate(password)){
+          if (user && user.authenticate(password)&&user.state==1){
             console.log("로그인 성공:", username);
             req.flash('succId',username);
             req.flash('admin', user.admin);
+            req.flash('state', user.state);
+            console.log('state',user.state)
             console.log('admin',user.admin);
             return done(null, user);
+          }
+          else if(user && user.authenticate(password)){
+            req.flash('stdid', username);
+            req.flash('errors', {state:'승인 대기중입니다.'});
+            return done(null, false);
           }
           else {
             req.flash('stdid', username);
