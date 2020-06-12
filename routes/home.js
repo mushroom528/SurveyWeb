@@ -15,7 +15,7 @@ router.get('/login', (req, res) => {
 router.get('/success', (req, res) => {
     var succId = req.flash('succId')[0] || {};
     var admin = req.flash('admin')[0] || {};
-    res.render('users/success', { succId : succId, admin : admins })
+    res.render('users/success', { succId : succId, admin : admin })
 })
 router.get('/', (req, res) => res.redirect('/home'));
 router.get('/home', (req, res) => res.render('home/welcome'));
