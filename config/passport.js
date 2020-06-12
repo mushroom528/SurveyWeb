@@ -22,12 +22,14 @@ passport.use('local-login',
     function(req, username, password, done) { // 로그인시 호출 되는 함수 파라미터는 입력 한 아이디, 비번
       User.findOne({stdid:username})    // DB에서 아이디랑 비번찾기
         .select({password:1})
+        .select({admin:1})
         .exec(function(err, user) {
           if (err) return done(err);
-
-          if (user && user.authenticate(password)){ // 해쉬 비번 비교
+          if (user && user.authenticate(password)){
             console.log("로그인 성공:", username);
             req.flash('succId',username);
+            req.flash('admin', user.admin);
+            console.log('admin',user.admin);
             return done(null, user);
           }
           else {

@@ -17,6 +17,9 @@ var userSchema = mongoose.Schema({
     trim:true,
     select:false
   },
+  admin:{
+    type:Number, 
+    default: 0},
   state:{
     type:Number, 
     default: 0} // 사진인증 X -> 0, 사진인증 O -> 1

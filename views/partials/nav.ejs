@@ -17,10 +17,17 @@
           <% if(isAuthenticated){ %> <!-- 로그인 성공시 화면 -->
             <li class="nav-item"><a href="/users/<%= currentUser.username %>" class="nav-link">My Survey</a></li>
             <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
-          <% } else { %>
+          
+            <% if(admin==1){ %>
+              <li class="nav-item"><a href="/" class="nav-link">가입승인</a></li>
+              <%}
+            %>
+            <% } else { %>
             <li class="nav-item"><a href="/users/new" class="nav-link">Sign Up</a></li>
             <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
           <% } %>
+
+          
         </ul>
       </div>
     </div>
