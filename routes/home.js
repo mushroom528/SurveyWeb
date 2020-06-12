@@ -12,13 +12,13 @@ router.get('/login', (req, res) => {
       errors:errors
     });
 });
-router.get('/success', (req, res) => {
+router.get('/home', (req, res) => {
     var succId = req.flash('succId')[0] || {};
     var admin = req.flash('admin')[0] || {};
-    res.render('users/success', { succId : succId, admin : admin })
+    res.render('home/welcome', { succId : succId, admin : admin })
 })
 router.get('/', (req, res) => res.redirect('/home'));
-router.get('/home', (req, res) => res.render('home/welcome'));
+//router.get('/home', (req, res) => res.render('home/welcome'));
 router.get('/about', (req, res) => res.render('home/about'));
 router.post('/login',(req,res,next) => {
     var errors = {};
@@ -44,7 +44,7 @@ router.post('/login',(req,res,next) => {
     //req.flash('succId',req.body);
   },
   passport.authenticate('local-login', {    // 로그인 성공, 실패시 해당 경로로 redirect
-    successRedirect : '/success',
+    successRedirect : '/home',
     failureRedirect : '/login'
   }
 ));

@@ -7,7 +7,10 @@
   </head>
   <body>
     <%- include('../partials/nav') %>
-
+    <% if(admin==1){ %>
+      <a href="/" class="nav-link">가입승인</a>
+      <%}
+    %>
     <div class="container mb-3">
 
       <div class="jumbotron">
