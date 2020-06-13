@@ -10,8 +10,8 @@ util.parseError = function(errors){
       parsed[name] = { message:validationError.message };
     }
   } 
-  else if(errors.code == '11000' && errors.errmsg.indexOf('username') > 0) {
-    parsed.username = { message:'This username already exists!' };
+  else if(errors.code == '11000' && errors.errmsg.indexOf('stdid') > 0) {
+    parsed.stdid = { message:'이미 등록된 학번이에요.' };
   } 
   else {
     parsed.unhandled = JSON.stringify(errors);

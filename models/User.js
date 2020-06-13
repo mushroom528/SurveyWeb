@@ -6,7 +6,7 @@ var mongoose = require('mongoose');
 var userSchema = mongoose.Schema({
   stdid:{
     type:String, 
-    required:[true,'Username is required!'], 
+    required:[true,'학번을 입력해주세요.'], 
     match:[/^.{8,8}$/,'학번을 올바르게 입력해주세요.'], // regex(정규표현식) 자세한건 검색
     trim:true, // 문자열 앞, 뒤 공백삭제
     unique:true

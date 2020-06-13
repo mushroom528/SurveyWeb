@@ -44,17 +44,16 @@ var upload = multer({storage: storage});
 router.get('/new', (req, res) => {
   var user = req.flash('user')[0] || {};  // 유저 이름과 에러메세지 받아오기
   var errors = req.flash('errors')[0] || {};
+  console.log("에러: ",errors);
   res.render('users/new', { user:user, errors:errors });
 });
 
 // create
 router.post('/', upload.single('user_file'),(req, res) => {
-  console.log(req.body);
   User.create(req.body, (err, user) => {
     if(err) {
       req.flash('user', req.body);  // 생성시 에러가 있으면 에러메세지 생성 후 redirect
       req.flash('errors', util.parseError(err));
-      
       return res.redirect('/users/new');
     }
     console.log(req.file);
