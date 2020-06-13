@@ -43,7 +43,6 @@ app.use('/', require('./routes/home'));
 app.use('/users', require('./routes/users')); 
 app.use('/posts', util.getPostQueryString, require('./routes/posts'));
 
-
 app.listen(3000, function(){ 
   console.log('server on!'); 
 });
