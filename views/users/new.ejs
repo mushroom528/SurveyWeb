@@ -11,8 +11,19 @@
     <div class="container mb-3">
 
       <h3 class="contentBoxTop mb-3">회원 가입</h3>
-
-      <form action="/users" method="post">
+      <script language="javascript">
+        function checkIt()
+        {
+          var form = document.write_form; 
+          if (form.user_file.value==""){
+            alert ("학생증 사진을 선택해주세요.");
+            form.user_file.focus();
+            return false;
+          } 
+          return true;
+        }
+        </script>
+      <form action="/users" method="post" enctype="multipart/form-data" name="write_form" onsubmit="return checkIt()">
         <div class="form-group row">
           <label for="stdid" class="col-sm-3 col-form-label">학번</label>
           <div class="col-sm-9">
@@ -38,8 +49,10 @@
             <% if(errors.passwordConfirmation){ %> 
               <span class="invalid-feedback"><%= errors.passwordConfirmation.message %></span>
             <% } %>
+            
           </div>
         </div>
+        <input type="file" name="user_file" id="user_file">
         <% if(errors.unhandled){ %> 
           <div class="alert alert-danger">
             <%= errors.unhandled %>
