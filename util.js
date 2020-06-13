@@ -35,4 +35,22 @@ util.noPermission = function(req, res){   // 콜백함수 아님, 권한을 확�
   res.redirect('/login');
 }
 
+// res.query에서 전달받은 query에서 page, limit값을 추출하여 다시 한줄의 문자열로 만듬
+util.getPostQueryString = function(req, res, next){ // res.local에 getPostQueryString()를 추가(express의 미들웨어)
+  res.locals.getPostQueryString = function(isAppended=false, overwrites={}){  // 함수에 아무런 인자를 전달하지 않을 경우 초기값, false, {}    
+    var queryString = '';
+    var queryArray = [];
+    var page = overwrites.page?overwrites.page:(req.query.page?req.query.page:'');
+    var limit = overwrites.limit?overwrites.limit:(req.query.limit?req.query.limit:'');
+
+    if(page) queryArray.push('page='+page);
+    if(limit) queryArray.push('limit='+limit);
+
+    if(queryArray.length>0) queryString = (isAppended?'&':'?') + queryArray.join('&');
+
+    return queryString;
+  }
+  next();
+}
+
 module.exports = util;

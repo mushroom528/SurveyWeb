@@ -5,6 +5,7 @@ var flash = require('connect-flash');
 var session = require('express-session'); 
 var methodOverride = require('method-override');
 var passport = require('./config/passport'); 
+var util = require('./util');
 var app = express();
 
 // mongoDB 기본 설정 4개 꼭 해야함
@@ -40,7 +41,7 @@ db.on('error', function(err){
 
 app.use('/', require('./routes/home'));
 app.use('/users', require('./routes/users')); 
-app.use('/posts', require('./routes/posts'));
+app.use('/posts', util.getPostQueryString, require('./routes/posts'));
 
 
 app.listen(3000, function(){ 

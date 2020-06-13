@@ -18,7 +18,7 @@
         </ol>
       </nav>
 
-      <form action="/posts/<%= boardNum %>" method="post">
+      <form action="/posts/<%= boardNum %><%= getPostQueryString() %>" method="post">
 
         <div class="form-group">
           <label for="title">제목</label>
@@ -41,7 +41,7 @@
           </div>
         <% } %>
         <div>
-          <a class="btn btn-primary" href="/posts">뒤로가기</a>
+          <a class="btn btn-primary" href="/posts<%= boardNum %><%= getPostQueryString() %>">뒤로가기</a>
           <button type="submit" class="btn btn-primary">글쓰기</button>
         </div>
 
