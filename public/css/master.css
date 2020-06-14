@@ -35,3 +35,21 @@ body {
   .board-table .date {
     width: 100px;
   }
+  .post-index-tool {
+    max-width: 450px;
+  }
+  .post-index-tool input[type='text']{
+    max-width: 130px;
+  }
+  .post-body,
+  .comment-text {
+    white-space: pre-line;
+  }
+ .comment-edit,
+.comment-edit-enabled .comment-show {
+  display:none;
+}
+
+.comment-edit-enabled .comment-edit {
+  display:inherit;
+}

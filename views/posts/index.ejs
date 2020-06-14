@@ -10,7 +10,7 @@
 
     <div class="container mb-3">
 
-      <h2 class="mb-3">게시판</h2>
+      <h2 class="mb-3">게시판<%= boardNum %></h2>
 
       <table class="board-table table table-sm border-bottom">
 
@@ -77,18 +77,31 @@
     </div>
 
 <!-- get을 사용하여 select에서 선택한 value가 자동으로 queryString으로 전달 -->
-    <form action="/posts/<%= boardNum %>" method="get"> 
+    <form action="/posts/<%= boardNum %>" method="get" class="post-index-tool"> 
       <div class="form-row">
 
-        <div class="form-group col-3">
-          <label>Show</label>
+        <div class="form-group col-4 searchbar">
+          <label>보이는 게시물 수</label>
           <select name="limit" class="custom-select" onchange="this.parentElement.parentElement.parentElement.submit()">
-            <option value="5" <%= limit==5?'selected':'' %>>5 posts</option>
-            <option value="10" <%= limit==10?'selected':'' %>>10 posts</option>
-            <option value="20" <%= limit==20?'selected':'' %>>20 posts</option>
+            <option value="5" <%= limit==5?'selected':'' %>>5 게시물</option>
+            <option value="10" <%= limit==10?'selected':'' %>>10 게시물</option>
+            <option value="20" <%= limit==20?'selected':'' %>>20 게시물</option>
           </select>
         </div>
-
+        <div class="form-group col-8"> <!-- 2 -->
+          <label>검색</label>
+          <div class="input-group">
+            <select name="searchType" class="custom-select">
+              <option value="title,body" <%= searchType=='title,body'?'selected':'' %>>제목, 내용</option>
+              <option value="title" <%= searchType=='title'?'selected':'' %>>제목</option>
+              <option value="body" <%= searchType=='body'?'selected':'' %>>내용</option>
+            </select>
+            <input minLength="3" type="text" name="searchText" value="<%= searchText %>">
+            <div class="input-group-append">
+              <button class="btn btn-outline-primary" type="submit">검색</button>
+            </div>
+          </div>
+        </div>
       </div>
     </form>
 
