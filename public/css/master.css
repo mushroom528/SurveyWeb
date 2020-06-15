@@ -53,3 +53,12 @@ body {
 .comment-edit-enabled .comment-edit {
   display:inherit;
 }
+
+.title {
+  text-decoration: none;
+  color: #7c7c7d;
+}
+.title:hover {
+  color: #585859;
+  text-decoration: none;
+}

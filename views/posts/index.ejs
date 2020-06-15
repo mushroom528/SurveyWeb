@@ -9,9 +9,11 @@
     <%- include('../partials/nav') %>
 
     <div class="container mb-3">
-
-      <h2 class="mb-3">게시판<%= boardNum %></h2>
-
+      <% if(boardNum == 1){ %>
+      <h2 class="mb-3">학교설문</h2>
+        <% } else if(boardNum == 2) { %>
+          <h2 class="mb-3">학생설문</h2>
+        <% } %>
       <table class="board-table table table-sm border-bottom">
 
         <thead class="thead-light">
