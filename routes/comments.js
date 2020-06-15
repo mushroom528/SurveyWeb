@@ -7,7 +7,7 @@ var Post = require('../models/Post');
 var util = require('../util');
 
 // create
-router.post('/', util.isLoggedin, checkPostId, function(req, res){ // checkPostId는 미들웨어 함수 전달받은 id가 db에 있는지 확인
+router.post('/:boardNum', util.isLoggedin, checkPostId, function(req, res){ // checkPostId는 미들웨어 함수 전달받은 id가 db에 있는지 확인
   var post = res.locals.post; 
 
   req.body.author = req.user._id; 
@@ -23,7 +23,7 @@ router.post('/', util.isLoggedin, checkPostId, function(req, res){ // checkPostI
 });
 
 // update 
-router.put('/:id', util.isLoggedin, checkPermission, checkPostId, function(req, res){
+router.put('/:id/:boardNum', util.isLoggedin, checkPermission, checkPostId, function(req, res){
   var post = res.locals.post;
 
   req.body.updatedAt = Date.now();
