@@ -23,10 +23,6 @@ var userSchema = mongoose.Schema({
   manager:{
     type:Number, 
     default: 0},
-  image:{
-    type:Number,
-    required:[true,'사진을 업로드해주세요.'], 
-    default:0},  
   state:{
     type:Number, 
     default: 0} // 사진인증 X -> 0, 사진인증 O -> 1
