@@ -9,16 +9,21 @@ var Comment = require('../models/Comment');
 router.get('/:boardNum', async function(req, res){
   var page = Math.max(1, parseInt(req.query.page));   // 게시판 페이지(쿼리스트링(문자열)-> 정수형, 최소 1)
   var limit = Math.max(1, parseInt(req.query.limit)); // 최대 페이지
+  //var manage = req.user.manage;
   page = !isNaN(page)?page:1; // isNaN() 값이 NaN인지 판별(true, false)                         
   limit = !isNaN(limit)?limit:10; // 값이 없을 경우 기본값   
-
   var searchQuery = createSearchQuery(req.query);
   console.log("search: ", req.query);
   // 무시할 게시물 변수(ex: 페이지당 5개의 게시물이 있으면, 3번째 페이지는 앞에 10개의 data는 무시하고 11번째부터)
   var skip = (page-1)*limit; 
   var count = await Post.countDocuments(searchQuery); // 조건에 맞는 데이터 수 저장 {} -> 조건 없음
   var maxPage = Math.ceil(count/limit); // 전체 페이지수
-
+  if(req.user){
+    var manager = req.user.manager;
+  }
+  else{
+    var manager=0;
+  }
   var posts = await Post.find({$and: [{boardNum: req.params.boardNum}, searchQuery]}) // DB에서 데이터 찾기
   .populate('author')            // relation 된 항목의 값 생성 (user의 값을 author에 생성함)
   .sort('-createdAt')            // 정렬방법 -붙으면 내림차순 createdAt 수정될 경우 날짜 저장
@@ -34,10 +39,14 @@ router.get('/:boardNum', async function(req, res){
       maxPage:maxPage,  // 마지막 페이지 번호
       limit:limit,       // 페이지당 보여줄 게시물 수
       searchType:req.query.searchType, 
-      searchText:req.query.searchText  
-    });   // posts/index 로 렌더링 후 데이터 보내기
+      searchText:req.query.searchText, 
+      manager:manager
+      
+    });  
+     // posts/index 로 렌더링 후 데이터 보내기
     //if (posts.length !== 0) console.log(posts, posts.length);
   });
+  
 });
 
 // New

@@ -24,6 +24,7 @@ passport.use('local-login',
         .select({password:1})
         .select({admin:1})
         .select({state:1})
+        .select({manager:1})
         .exec(function(err, user) {
           if (err) return done(err);
           if (user && user.authenticate(password)&&user.state==1){
@@ -31,8 +32,10 @@ passport.use('local-login',
             req.flash('succId',username);
             req.flash('admin', user.admin);
             req.flash('state', user.state);
+            req.flash('manager',user.manager);
             console.log('state',user.state)
             console.log('admin',user.admin);
+            console.log('manager',user.manager);
             return done(null, user);
           }
           else if(user && user.authenticate(password)){

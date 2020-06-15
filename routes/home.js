@@ -14,8 +14,13 @@ router.get('/login', (req, res) => {
 });
 router.get('/home', (req, res) => {
     var succId = req.flash('succId')[0] || {};
-    var admin = req.flash('admin')[0] || {};
-    
+    if(req.user){
+      var admin = req.user.admin;
+    }
+    else{
+      var admin = 0;
+    }
+    //var admin = req.flash('admin')[0] || {};
     res.render('home/welcome', { succId : succId, admin : admin })
     
   })
@@ -44,7 +49,8 @@ router.post('/login',(req,res,next) => {
     }
     //req.flash('succId',req.body);
   },
-  passport.authenticate('local-login', {    // 로그인 성공, 실패시 해당 경로로 redirect
+  passport.authenticate('local-login', {
+    failureFlash: true,    // 로그인 성공, 실패시 해당 경로로 redirect
     successRedirect : '/home',
     failureRedirect : '/login'
   }
