@@ -20,9 +20,11 @@ router.get('/:boardNum', async function(req, res){
   var maxPage = Math.ceil(count/limit); // 전체 페이지수
   if(req.user){
     var manager = req.user.manager;
+    var state=req.user.state;
   }
   else{
     var manager=0;
+    var state=0;
   }
   var posts = await Post.find({$and: [{boardNum: req.params.boardNum}, searchQuery]}) // DB에서 데이터 찾기
   .populate('author')            // relation 된 항목의 값 생성 (user의 값을 author에 생성함)
@@ -40,8 +42,8 @@ router.get('/:boardNum', async function(req, res){
       limit:limit,       // 페이지당 보여줄 게시물 수
       searchType:req.query.searchType, 
       searchText:req.query.searchText, 
-      manager:manager
-      
+      manager:manager,
+      state:state,
     });  
      // posts/index 로 렌더링 후 데이터 보내기
     //if (posts.length !== 0) console.log(posts, posts.length);

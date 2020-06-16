@@ -50,7 +50,7 @@
       <div class="row mb-3">
 
         <div class="col-2"> 
-        <% if(isAuthenticated && manager==1){ %> <!-- 로그인 상태일 경우 글쓰기 보임 -->
+        <% if((isAuthenticated && manager==1 &&boardNum==1)||(isAuthenticated && state==1 && boardNum==2)){ %> <!-- 로그인 상태일 경우 글쓰기 보임 -->
           <a class="btn btn-primary" href="/posts/<%= boardNum %>/new<%= getPostQueryString() %>">글쓰기</a>
         <% } %>
       </div>

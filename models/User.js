@@ -55,18 +55,18 @@ userSchema.methods.authenticate = function (password) {
 };
 
 // password validation 
-var passwordRegex = /^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{6,16}$/; // 문자와 숫자 섞어서 6~16자로 하세요
-var passwordRegexErrorMessage = '문자와 숫자를 섞어 6~16자로 해주세요.'; // 에러메세지
+var passwordRegex = /^(?=.*[a-zA-Z])(?=.*[!@#$%^*+=-])(?=.*[0-9]).{8,25}$/; // 문자와 숫자 섞어서 6~16자로 하세요
+var passwordRegexErrorMessage = '숫자+영문자+특수문자 조합으로 8자리 이상 사용해야 합니다.'; // 에러메세지
 userSchema.path('password').validate(function(v) {
   var user = this; 
 
   // 비밀번호와 비밀번호 확인이 다를경우
   if(user.isNew){ // isNew는 해당 모델이 생성되면 true
-    if(user.password !== user.passwordConfirmation) {
-      user.invalidate('passwordConfirmation', '비밀번호와 비밀번호 확인이 달라요.');
     if(!passwordRegex.test(user.password)){ // 정규표현식 테스트 true, false 반환
       user.invalidate('password', passwordRegexErrorMessage); // false면 에레메세지
       } 
+    if(user.password !== user.passwordConfirmation) {
+      user.invalidate('passwordConfirmation', '비밀번호와 비밀번호 확인이 달라요.');
     }
   }
 });
