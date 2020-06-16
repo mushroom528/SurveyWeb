@@ -37,7 +37,7 @@ router.put('/:id/:boardNum', util.isLoggedin, checkPermission, checkPostId, func
 });
 
 // destroy
-router.delete('/:id', util.isLoggedin, checkPermission, checkPostId, function(req, res){
+router.delete('/:id/:boardNum', util.isLoggedin, checkPermission, checkPostId, function(req, res){
   var post = res.locals.post;
 
   Comment.findOne({_id:req.params.id}, function(err, comment){

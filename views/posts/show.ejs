@@ -13,7 +13,8 @@
       <nav aria-label="breadcrumb">
         <ol class="breadcrumb p-1 pl-2 pr-2">
           <li class="breadcrumb-item"><a href="/">Home</a></li>
-          <li class="breadcrumb-item"><a href="/posts/<%= boardNum %>">Board<%= boardNum %></a></li>
+          <li class="breadcrumb-item"><a href="/posts/<%= boardNum %>"><% if(boardNum == 1){ %>
+          학교설문<% } else if(boardNum == 2) { %> 학생설문 <% } %></a></li>
           <li class="breadcrumb-item active" aria-current="page"><%= post.title %></li>
         </ol>
       </nav>
@@ -64,7 +65,7 @@
                       <small class="d-block">
         <!-- 수정버튼 --> <a href="javascript:void(0)" onclick="$('.comment-reply-enabled').removeClass('comment-reply-enabled'); $('.comment-edit-enabled').removeClass('comment-edit-enabled'); $('#comment-<%= comment._id %>').addClass('comment-edit-enabled')">수정</a>
                         |
-        <!-- 삭제버튼 --> <form action="/comments/<%= comment._id %>?postId=<%= post._id %>&_method=delete<%= getPostQueryString(true) %>" method="post" class="d-inline">
+        <!-- 삭제버튼 --> <form action="/comments/<%= comment._id %>/<%= boardNum %>?postId=<%= post._id %>&_method=delete<%= getPostQueryString(true) %>" method="post" class="d-inline">
                           <a href="javascript:void(0)" onclick="confirm('정말로 삭제하시겠습니까?')?this.parentElement.submit():null;">삭제</a>
                         </form>
                       </small>
