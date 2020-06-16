@@ -14,9 +14,9 @@
         <% } else if(boardNum == 2) { %>
           <h2 class="mb-3">학생설문</h2>
         <% } %>
-      <table class="board-table table table-sm border-bottom">
+      <table class="board-table table table-sm border-bottom"style="background-color: #ffffff;">
 
-        <thead class="thead-light">
+        <thead style="background-color: #e3f2fd;" >
           <tr>
             <th scope="col">제목</th>
             <th scope="col" class="author">작성자</th>
@@ -50,7 +50,7 @@
       <div class="row mb-3">
 
         <div class="col-2"> 
-        <% if((isAuthenticated && manager==1 &&boardNum==1)||(isAuthenticated && state==1 && boardNum==2)){ %> <!-- 로그인 상태일 경우 글쓰기 보임 -->
+        <% if((isAuthenticated && manager==1 &&boardNum==1)||(isAuthenticated && state==1 &&boardNum==2)){ %> <!-- 로그인 상태일 경우 글쓰기 보임 -->
           <a class="btn btn-primary" href="/posts/<%= boardNum %>/new<%= getPostQueryString() %>">글쓰기</a>
         <% } %>
       </div>
