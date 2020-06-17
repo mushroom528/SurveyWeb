@@ -185,7 +185,17 @@ router.get('/:boardNum/new', util.isLoggedin, function(req, res){
 // create
 router.post('/:boardNum', util.isLoggedin, function(req, res){
   var urll= ClevisURL.collect(req.body.body);
-  console.log("추출된 url",urll);
+  /*function replaceAll(str, searchStr, replaceStr) {
+    return str.split(searchStr).join(replaceStr);
+  } replaceAll함수 사용하기 위함
+  */ 
+
+  //console.log("변경되기전 내용",req.body.body);
+  console.log("추출된 url",urll[0]); 
+  //req.body.body.replace(urll[0],'');
+  //replaceAll(req.body.body,urll[0],"");
+
+  //console.log("내용 변경",req.body.body);
   console.log("req.user:", req.user, req.params.boardNum);
   req.body.author = req.user._id; // req.user는 passport에 의해 로그인하면 자동 생성
   console.log("작성자:",req.body);
