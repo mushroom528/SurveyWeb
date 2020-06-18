@@ -199,6 +199,7 @@ router.post('/:boardNum', util.isLoggedin, function(req, res){
   console.log("req.user:", req.user, req.params.boardNum);
   req.body.author = req.user._id; // req.user는 passport에 의해 로그인하면 자동 생성
   console.log("작성자:",req.body);
+  
   Post.create(req.body, function(err, post){
     if(err){
         req.flash('post', req.body);
@@ -208,8 +209,12 @@ router.post('/:boardNum', util.isLoggedin, function(req, res){
     Post.findOneAndUpdate({title: req.body.title}, {boardNum: req.params.boardNum}, function(err, Num){
       if(err) return res.json(err);    
     });
-    // 새 글 작성시 쿼리스트링 제거하여 전체 게시물 보이게 함
-    res.redirect('/posts/'+ req.params.boardNum + res.locals.getPostQueryString(false, { page:1, searchText:'' }));
+    Post.findOne({$and: [{title: req.body.title}, {body: req.body.body}]})
+    .exec((err, post) => {
+      // 새 글 작성시 쿼리스트링 제거하여 전체 게시물 보이게 함
+      res.redirect('/posts/'+ req.params.boardNum +"/"+post._id+ res.locals.getPostQueryString(false, { page:1, searchText:'' }));
+    });
+    
   });
 });
 
