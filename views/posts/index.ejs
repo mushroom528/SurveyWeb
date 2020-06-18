@@ -33,7 +33,7 @@
           <% posts.forEach(function(post) { %>
             <tr>
               <td>
-                <a href="/posts/<%= boardNum %>/<%= post._id %><%= getPostQueryString() %>"><div class="ellipsis"><%= post.title %></div></a>
+                <a href="/posts/<%= boardNum %>/<%= post._id %><%= getPostQueryString() %>" style="color: #000000;"><div class="ellipsis"><%= post.title %></div></a>
               </td>
               <td class="author"> 
                 <div class="ellipsis"><%= post.author ? post.author.stdid : "" %></div>
