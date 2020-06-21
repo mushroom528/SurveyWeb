@@ -2,6 +2,7 @@
 var express = require('express');
 var router = express.Router();
 var User = require('../models/User');
+var Post = require('../models/Post');
 var util = require('../util');
 var multer = require('multer');
 var storage = multer.diskStorage({
@@ -60,6 +61,24 @@ router.post('/', upload.single('user_file'),(req, res) => {
     res.redirect('/home');
   });
 });
+
+// show
+router.get('/:username', function(req, res){
+    Promise.all([ // DB에서 두개 이상의 데이터를 받을때 사용하는 함수, 배열을 인자로 받음
+      User.findOne({stdid:req.params.username}),
+    ])
+    .then(([user]) => {
+      Post.find({author:user}).exec((err, posts) => {
+        console.log("유저정보: ",user);
+        console.log("유저 게시물: ",posts); 
+        res.render('users/show', {user:user, posts:posts});  
+      })
+      
+    })
+    .catch((err) => {
+      return res.json(err);
+    });
+  });
 
 module.exports = router;
 // 권한 확인 함수
