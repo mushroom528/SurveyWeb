@@ -140,7 +140,7 @@ router.get('/:boardNum', async function(req, res){
   console.log("search: ", req.query);
   // 무시할 게시물 변수(ex: 페이지당 5개의 게시물이 있으면, 3번째 페이지는 앞에 10개의 data는 무시하고 11번째부터)
   var skip = (page-1)*limit; 
-  var count = await Post.countDocuments(searchQuery); // 조건에 맞는 데이터 수 저장 {} -> 조건 없음
+  var count = await Post.countDocuments({$and: [{boardNum: req.params.boardNum}, searchQuery]}); // 조건에 맞는 데이터 수 저장 {} -> 조건 없음
   var maxPage = Math.ceil(count/limit); // 전체 페이지수
   if(req.user){
     var manager = req.user.manager;
@@ -153,11 +153,11 @@ router.get('/:boardNum', async function(req, res){
   var posts = await Post.find({$and: [{boardNum: req.params.boardNum}, searchQuery]}) // DB에서 데이터 찾기
   .populate('author')            // relation 된 항목의 값 생성 (user의 값을 author에 생성함)
   .sort('-createdAt')            // 정렬방법 -붙으면 내림차순 createdAt 수정될 경우 날짜 저장
-  .skip(skip)   // 일정한 수 만큼 검색한 결과를 무시
+  .skip(skip)   // 일정한 수 만큼 한 결과를 무시
   .limit(limit) // 일정한 수 만큼만 검색한 결과 보여줌
   .exec(function(err, posts){    // 데이터를 받아서 할일 쓰기
     if(err) return res.json(err);
-    console.log("검색한 게시물:",posts);
+    //console.log("검색한 게시물:",posts);
     res.render('posts/index', {
       posts:posts, 
       boardNum: req.params.boardNum,

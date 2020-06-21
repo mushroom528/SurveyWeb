@@ -71,6 +71,7 @@ router.get('/:username', function(req, res){
       Post.find({author:user}).exec((err, posts) => {
         console.log("유저정보: ",user);
         console.log("유저 게시물: ",posts); 
+        
         res.render('users/show', {user:user, posts:posts});  
       })
       
