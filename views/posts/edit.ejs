@@ -32,7 +32,8 @@
 
         <div class="form-group">
           <label for="body">내용</label>
-          <textarea id="body" name="body" rows="5" class="form-control <%= (errors.body)?'is-invalid':'' %>"><%= post.body %></textarea>
+          <textarea id="summernote" name="body" rows="5" class="form-control <%= (errors.body)?'is-invalid':'' %>"><%= post.body %></textarea>
+         
           <% if(errors.body){ %>
             <span class="invalid-feedback"><%= errors.body.message %></span>
           <% } %>
@@ -50,5 +51,17 @@
       </form>
 
     </div>
+    <script>
+      $(document).ready(function() {
+          $('#summernote').summernote({
+            fontNames: ['Arial', 'Arial Black', 'Comic Sans MS', 'Courier New', 'Noto Sans KR', 'Merriweather'],
+            placeholder: '내용을 입력하세요.',
+            tabsize: 2,
+            height: 300,
+            codeviewFilter: false,
+            codeviewIframeFilter: true,
+          });
+      });
+    </script>
   </body>
 </html>

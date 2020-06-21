@@ -4,6 +4,25 @@
 <html>
   <head>
     <%- include('../partials/head') %>
+    <script src="https://code.jquery.com/jquery-1.11.3.js"></script>
+    <style>
+      .urlCopyBtn {
+        font-weight:normal;	
+        color:gray;
+        text-decoration:none;
+        font-size:12px;	
+      }
+      .urlCopyBtnIcon {    
+        border:1px solid gray;
+        border-radius:3px;  
+        padding:0px 2px 1px 2px;
+        color:white;
+        background-color:gray;	  
+      }
+      .urlCopyBtnIcon a {
+        color:white;
+      }
+    </style>
   </head>
   <body>
     <%- include('../partials/nav') %>
@@ -26,8 +45,22 @@
           <div class="col-md-7 col-lg-8 col-xl-9 order-sm-2 order-md-1"> 
             <div class="post-body p-2"><%- post.body %>
             </div>
+            <a href="#urlCopyBtn" class="urlCopyBtn" style="float: right;">
+              <span></span>
+              <span class="urlCopyBtnIcon"">링크 복사</span>
+            </a>
           </div>
-
+          <input type="text" value= <%=urll%> id="urlAddress" style="display:none;">
+          <script type="text/javascript">
+          $('.urlCopyBtn').click(function(){	
+            var urlAddress= $('#urlAddress');
+            urlAddress.css('display','block').select();
+            document.execCommand("Copy");
+            urlAddress.css('display','none');
+            alert('설문조사 링크가 복사되었습니다.');	
+            return false;
+          });
+          </script>
           <div class="col-md-5 col-lg-4 col-xl-3 order-sm-1 order-md-2"> 
             <div class="post-info card m-2 p-2"> 
               <div class="border-bottom pb-1 mb-1"> 
