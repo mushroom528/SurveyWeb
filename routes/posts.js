@@ -210,15 +210,24 @@ router.post('/:boardNum', util.isLoggedin, function(req, res){
 router.get('/:boardNum/:id', function(req, res){
   var commentForm = req.flash('commentForm')[0] || {_id: null, form: {}};
   var commentError = req.flash('commentError')[0] || { _id:null, parentComment: null, errors:{}};
-
+  var a=0;
     Promise.all([ // DB에서 두개 이상의 데이터를 받을때 사용하는 함수, 배열을 인자로 받음
       Post.findOne({_id:req.params.id}).populate({ path: 'author', select: 'stdid' }),
       Comment.find({post:req.params.id}).sort('createdAt').populate({ path: 'author', select: 'stdid' })
     ])
     .then(([post, comments]) => {
       var urll= ClevisURL.collect(post.body);
-      console.log("추출된 url",urll[0]); 
-      res.render('posts/show', { post:post, comments:comments, commentForm:commentForm, commentError:commentError, boardNum: req.params.boardNum, urll:urll[0]});
+      console.log("추출된 url",urll[0]);
+      console.log("변경전",post.body);
+      if(post.body.replace("<p>"+urll+"</p>","")==""){
+        post.body=post.body.replace(urll,"");
+        post.body=post.body.replace("<p>","");
+        post.body=post.body.replace("</p>","");
+        a=1;
+    
+      }
+      console.log("변경후",post.body);
+      res.render('posts/show', { post:post, comments:comments, commentForm:commentForm, commentError:commentError, boardNum: req.params.boardNum, urll:urll[0],a:a});
       
     })
     .catch((err) => {

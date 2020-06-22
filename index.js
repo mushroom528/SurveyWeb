@@ -7,6 +7,7 @@ var methodOverride = require('method-override');
 var passport = require('./config/passport'); 
 var util = require('./util');
 var app = express();
+var bodyParser=require('body-parser');
 
 // mongoDB 기본 설정 4개 꼭 해야함
 mongoose.set('useNewUrlParser', true);   
@@ -15,7 +16,8 @@ mongoose.set('useCreateIndex', true);
 mongoose.set('useUnifiedTopology', true);
 mongoose.connect('mongodb+srv://ypper7340:tjsdlswkd12@cluster0-nlcl9.mongodb.net/test?retryWrites=true&w=majority'); // connect string으로 mongoDB랑 node 연결
 var db = mongoose.connection;
-
+app.use(bodyParser.json({limit: '50mb'}));
+app.use(bodyParser.urlencoded({limit: '50mb', extended: true}));
 app.set('view engine','ejs'); 
 app.set('views', './views')
 app.use(express.static(__dirname + '/public'));

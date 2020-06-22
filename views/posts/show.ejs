@@ -42,9 +42,19 @@
         <h5 class="card-header p-2"style="background-color: #e3f2fd;"><%= post.title %></h5>
         <div class="row"> <!-- 공간 분활 https://getbootstrap.com/docs/4.4/layout/grid 참조 -->
 
-          <div class="col-md-7 col-lg-8 col-xl-9 order-sm-2 order-md-1"> 
+          <div class="col-md-7 col-lg-8 col-xl-9 order-sm-2 order-md-1">
             <div class="post-body p-2"><%- post.body %>
+              <% if(a==1){
+                %>
+                <a href=<%=urll%>><%=urll%></a>
+                <%
+              }
+              %>
+              
             </div>
+            
+            
+            
             <a href="#urlCopyBtn" class="urlCopyBtn" style="float: right;">
               <span></span>
               <span class="urlCopyBtnIcon"">링크 복사</span>
