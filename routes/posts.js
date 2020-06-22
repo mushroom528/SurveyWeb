@@ -219,15 +219,21 @@ router.get('/:boardNum/:id', function(req, res){
       var urll= ClevisURL.collect(post.body);
       console.log("추출된 url",urll[0]);
       console.log("변경전",post.body);
-      if(post.body.replace("<p>"+urll+"</p>","")==""){
-        post.body=post.body.replace(urll,"");
-        post.body=post.body.replace("<p>","");
-        post.body=post.body.replace("</p>","");
-        a=1;
-    
-      }
-      console.log("변경후",post.body);
-      res.render('posts/show', { post:post, comments:comments, commentForm:commentForm, commentError:commentError, boardNum: req.params.boardNum, urll:urll[0],a:a});
+
+     // post.body = post.body.replace(/<(\/img|img)([^>]*)>/gi,"");
+    var text = post.body.replace(urll[0],"");
+    if (post.body.indexOf("<p>"+urll[0]+"</p>") != -1){
+      a=1;
+    }
+    else if(post.body.indexOf("<a href="+'"'+urll[0])!=-1){
+      a=0;
+    }
+      
+        
+      
+      console.log("변경후",text);
+      console.log("하하",a);
+      res.render('posts/show', { text:text,post:post, comments:comments, commentForm:commentForm, commentError:commentError, boardNum: req.params.boardNum, urll:urll[0],a:a});
       
     })
     .catch((err) => {
