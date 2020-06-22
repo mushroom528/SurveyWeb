@@ -192,7 +192,7 @@ router.post('/:boardNum', util.isLoggedin, function(req, res){
     if(err){
         req.flash('post', req.body);
         req.flash('errors', util.parseError(err));
-        return res.redirect('/posts/'+ req.params.boardNum +'new'+res.locals.getPostQueryString());
+        return res.redirect('/posts/'+ req.params.boardNum +'/'+'new'+res.locals.getPostQueryString());
       }
     Post.findOneAndUpdate({title: req.body.title}, {boardNum: req.params.boardNum}, function(err, Num){
       if(err) return res.json(err);    
