@@ -67,7 +67,11 @@
           <div class="col-md-5 col-lg-4 col-xl-3 order-sm-1 order-md-2"> 
             <div class="post-info card m-2 p-2"> 
               <div class="border-bottom pb-1 mb-1"> 
-                <span>작성자</span> : <%= post.author ? post.author.stdid : "" %>
+                <span>작성자</span> : <% if(post.author && !post.anonymous) { %>
+                  <%= post.author.stdid %>
+                  <% } else if(post.author && post.anonymous) { %>
+                      익명
+                      <% } %>
               </div>
               <div><span>날짜</span> : <span data-date-time="<%= post.createdAt %>"></span></div> 
               <% if(post.updatedAt) { %>

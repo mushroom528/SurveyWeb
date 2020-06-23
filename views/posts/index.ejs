@@ -36,7 +36,14 @@
                 <a href="/posts/<%= boardNum %>/<%= post._id %><%= getPostQueryString() %>" style="color: #000000;"><div class="ellipsis"><%= post.title %></div></a>
               </td>
               <td class="author"> 
-                <div class="ellipsis"><%= post.author ? post.author.stdid : "" %></div>
+                <div class="ellipsis">
+                  <!--<%= post.author ? post.author.stdid : "" %>-->
+                  <% if(post.author && !post.anonymous) { %>
+                    <%= post.author.stdid %>
+                    <% } else if(post.author && post.anonymous) { %>
+                        익명
+                        <% } %>
+                </div>
               </td>
               <td class="date">
                 <span data-date="<%= post.createdAt %>"></span>

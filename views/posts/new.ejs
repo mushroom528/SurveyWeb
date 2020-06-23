@@ -31,6 +31,7 @@
         
         <div class="form-group">
           <label for="body">내용</label>
+          <input type='checkbox' name='anonymous' value='1'/>익명
           <textarea id="summernote" name="body" class="form-control <%= (errors.body)?'is-invalid':'' %>"><%= post.body %></textarea>
 
           <% if(errors.body){ %>

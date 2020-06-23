@@ -12,7 +12,8 @@ var postSchema = mongoose.Schema({
   numId:{type:Number}, // 글번호
   createdAt:{type:Date, default:Date.now}, // Date.now는 현재 시간 리턴하는 함수
   updatedAt:{type:Date},
-  boardNum:{type:Number}  // 게시판 유형
+  boardNum:{type:Number},  // 게시판 유형
+  anonymous:{type:String}
 });
 
 // 글 번호 할당
