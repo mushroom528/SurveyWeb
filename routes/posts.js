@@ -172,7 +172,6 @@ router.get('/:boardNum', async function(req, res){
      // posts/index 로 렌더링 후 데이터 보내기
     //if (posts.length !== 0) console.log(posts, posts.length);
   });
-  
 });
 
 // New
@@ -217,8 +216,6 @@ router.get('/:boardNum/:id', function(req, res){
     ])
     .then(([post, comments]) => {
       var urll= ClevisURL.collect(post.body);
-      console.log("추출된 url",urll[0]);
-      console.log("변경전",post.body);
 
      // post.body = post.body.replace(/<(\/img|img)([^>]*)>/gi,"");
     var text = post.body.replace(urll[0],"");
@@ -228,11 +225,6 @@ router.get('/:boardNum/:id', function(req, res){
     else if(post.body.indexOf("<a href="+'"'+urll[0])!=-1){
       a=0;
     }
-      
-        
-      
-      console.log("변경후",text);
-      console.log("하하",a);
       res.render('posts/show', { text:text,post:post, comments:comments, commentForm:commentForm, commentError:commentError, boardNum: req.params.boardNum, urll:urll[0],a:a});
       
     })
