@@ -1,28 +1,23 @@
-# SURVEY_WEB
-성결대 설문조사 사이트
+# Survey Web
+- 컴퓨터 통신 실습 프로젝트 
+- 성결대에서 진행하는 각종 설문조사를 모아둔 웹 사이트 - 컴퓨터 구조
 
-## 자주 쓰는 명령어    
- * npm install : package.json에 명시된 모듈 설치
-## git 명령어
- * 저장소 생성   
- `git init`
- * 원격 저장소 복제   
- `git clone {url}`
- * 원격 저장소 추가   
- `git remote add origin {url}`
- * 변경 내용 추가하기   
- `git add .`
- * 커밋(변경 내용을 확정)   
- `git commit -m "커밋 내용"`
- * 원격 저장소로 올리기(push)   
- `git push origin master`
- * 원격 저장소와 로컬 저장소 합치기   
- `git pull origin {branch name}`   
- `git pull` 
+## 팀 구성
+- 팀장 : 정의석
+- 팀원 : 김효권, 나새영, 정선인, 응웬티후엔
 
-## 원격 저장소에 올리기
-변경내용 추가 -> 커밋 -> 원격 저장소   
- >1. git add .   
- >2. git commit -m "내용"   
- >3. git push origin master   
- 
+ ## 개발 환경 및 기술스택
+- VScode
+- node.js (express), ORM : mongoose
+- MongoDB
+- bootstrap
+
+### 설계 목표
+- Node.js와 MongoDB를 이용한 서버 구축
+- 회원가입 및 로그인 기능 구현
+- 게시글 작성 및 수정 삭제 기능 구현
+- 댓글 작성 및 수정, 삭제 기능 구현
+- 설문조사를 종합해서 확인할 수 있는 플랫폼 제작
+- 부서별로 진행되는 설문을 한눈에 확인할 수 있으므로, 설문 참여의 질 향상 가능
+
+## 기능 블록도
