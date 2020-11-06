@@ -21,3 +21,4 @@
 - 부서별로 진행되는 설문을 한눈에 확인할 수 있으므로, 설문 참여의 질 향상 가능
 
 ## 기능 블록도
+<img src="https://github.com/gyrnjs12/survey_web/blob/master/image/blockDiagram.png" alt="write" width="700px" height="600px"/>
