@@ -24,4 +24,4 @@
 <img src="https://github.com/gyrnjs12/survey_web/blob/master/image/blockDiagram.png" alt="blockdiagram" width="850px" height="200px"/>
 
 ## 회원 가입
-<img src="https://github.com/gyrnjs12/survey_web/blob/master/image/signUp.png" alt="signup />
+<img src="https://github.com/gyrnjs12/survey_web/blob/master/image/signUp.png" alt="signup" />
