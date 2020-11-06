@@ -30,4 +30,4 @@
 <img src="https://github.com/gyrnjs12/survey_web/blob/master/images/login.png" alt="login" width="800px" height="250px"/>
 
 ## 메인 화면
-<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/main.png" alt="main" width="800px" height="600px"/>
+<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/main.png" alt="main"/>
