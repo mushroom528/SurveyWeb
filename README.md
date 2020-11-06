@@ -21,7 +21,7 @@
 - 부서별로 진행되는 설문을 한눈에 확인할 수 있으므로, 설문 참여의 질 향상 가능
 
 ## 기능 블록도
-<img src="https://github.com/gyrnjs12/survey_web/blob/master/image/blockDiagram.png" alt="blockdiagram" width="850px" height="200px"/>
+<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/blockDiagram.png" alt="blockdiagram" width="850px" height="200px"/>
 
 ## 회원 가입
-<img src="https://github.com/gyrnjs12/survey_web/blob/master/image/signUp2.png" alt="signup" width="800px" height="250px"/>
+<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/signUp2.png" alt="signup" width="800px" height="250px"/>
