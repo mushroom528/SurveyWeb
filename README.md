@@ -24,4 +24,10 @@
 <img src="https://github.com/gyrnjs12/survey_web/blob/master/images/blockdiagram.png" alt="blockdiagram" width="850px" height="200px"/>
 
 ## 회원 가입
-<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/signUp2.png" alt="signup" width="800px" height="250px"/>
+<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/signup.png" alt="signup" width="800px" height="250px"/>
+
+## 로그인
+<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/login.png" alt="login" width="800px" height="250px"/>
+
+## 메인 화면
+<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/main.png" alt="main" width="800px" height="600px"/>
