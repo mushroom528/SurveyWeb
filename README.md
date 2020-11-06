@@ -36,17 +36,17 @@
 <img src="https://github.com/gyrnjs12/survey_web/blob/master/images/help.png" alt="help"/>
 
 ## 게시판
-<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/school.png" alt="schoolboard"/>
 - 학교설문 게시판
-<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/student.png" alt="studentboard"/>
+<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/school.png" alt="schoolboard"/>
 - 학생설문 게시판
-<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/board_write.png" alt="board_write"/>
+<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/student.png" alt="studentboard"/>
 - 글 작성
-<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/board_detail.png" alt="board_detail"/>
+<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/board_write.png" alt="board_write"/>
 - 게시글 확인
+<img src="https://github.com/gyrnjs12/survey_web/blob/master/images/board_detail.png" alt="board_detail"/>
 
 ## 댓글
 <img src="https://github.com/gyrnjs12/survey_web/blob/master/images/comment.png" alt="comment"/>
 
-# 마이페이지
+# 내가 쓴 글
 <img src="https://github.com/gyrnjs12/survey_web/blob/master/images/mypage.png" alt="mypage"/>
