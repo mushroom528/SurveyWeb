@@ -2,7 +2,7 @@
 - 컴퓨터 통신 실습 프로젝트 
 - 성결대에서 진행하는 각종 설문조사를 모아둔 웹 사이트 - 컴퓨터 구조
 
-## 🌏URL
+## 🌏Demo
  - https://arcane-badlands-11407.herokuapp.com/home
 
 ## 👪팀 구성
